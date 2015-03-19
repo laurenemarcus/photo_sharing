@@ -1,0 +1,12 @@
+<h1>All Photos for <%= @user.email %></h1>
+
+<h2>
+  <%= link_to "Add New Photos", new_user_image_path(current_user) %> |
+  <%= link_to "Log out", log_out_path %>
+</h2>
+
+<ul>
+<% @user.images.each do |img| %>
+  <li><%= image_tag img.image.url(:medium) %></li>
+<% end %>
+</ul>

@@ -1,20 +1,28 @@
 class ImagesController < ApplicationController
   def index
+    @user = User.find(params[:user_id])
+  end
+
+  def show
   end
 
   def create
-    @image = Image.create(image_params)
-    redirect_to new_image_path
+    @user = User.find(params[:user_id])
+    @image = @user.images.new(image_params)
+    if @image.save
+      flash[:notice] = "Your photo was added!"
+      redirect_to user_images_path
+    else
+      flash[:alert] = "There was a problem uploading your photo.  Please try again."
+      redirect_to :back
+    end
   end
-  # know id of the user and then attach the image to the user. we do not need to create a new user.
 
   def new
-    @image = Image.new
-    @images = Image.all
+    @user = User.find(params[:user_id])
+    @image = @user.images.new
   end
 
-  # Use strong_parameters for attribute whitelisting
-  # Be sure to update your create() and update() controller methods.
 private
 
   def image_params

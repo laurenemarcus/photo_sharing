@@ -1,0 +1,9 @@
+<h3>Welcome <%= @user.email %></h3>
+<h4>Here are your awesome photos</h4>
+
+<%= link_to "Add a new image", new_user_image_path %>
+
+
+<% @user.images.each do |img| %>
+  <%= image_tag img.image.url(:medium) %>
+<% end %>
