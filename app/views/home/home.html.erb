@@ -1,5 +1,7 @@
 <h1>Promptagram</h1>
-<p>You are currently logged in as <%= current_user.email %></p>
+<% if current_user %>
+  <p>You are currently logged in as <%= current_user.email %></p>
+<% end %>
 
 <%= link_to "Log in", log_in_path %>
 <%= link_to "New user", new_user_path %>
